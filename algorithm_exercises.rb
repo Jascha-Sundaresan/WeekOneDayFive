@@ -56,4 +56,14 @@ class PolyTreeNode
       end
     end
   end
+  
+  def trace_back_path(end_pos)
+    end_node = self.dfs(end_pos)
+    result = []
+    until end_node.parent == nil
+      result << end_node.value
+      end_node = end_node.parent
+    end
+    result.reverse
+  end
 end
