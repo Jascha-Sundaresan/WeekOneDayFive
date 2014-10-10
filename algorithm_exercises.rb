@@ -20,14 +20,13 @@ class PolyTreeNode
   
   def parent=(parent_node)
     return @parent = nil if parent_node == nil
-    remove_children_from(@parent, self) unless @parent == nil
+    @parent.children.delete self if @parent
     @parent = parent_node
     parent_node.children << self    
   end
   
   def add_child(child_node)
-    child_node.parent = self
-    
+    child_node.parent = self    
   end
   
   def remove_child(child_node)
@@ -47,14 +46,6 @@ class PolyTreeNode
     nil
   end
   
-  
-  def bfs(value)
-    return self if self.value == value
-    self.children.each do |child|
-            
-    end
-  end
-  
   def bfs(value)
     search_queue = [self]
     until search_queue.empty?
@@ -65,10 +56,4 @@ class PolyTreeNode
       end
     end
   end
-  
-  private
-  def remove_children_from(node, child)
-    node.children.reject! {|each_child| each_child == child}
-  end
-  
 end
